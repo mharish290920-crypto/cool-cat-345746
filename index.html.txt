@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Secure Cyber Terminal</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:monospace;
+margin:0;
+overflow:hidden;
+}
+
+h1{
+text-align:center;
+padding:10px;
+}
+
+#terminal{
+padding:20px;
+font-size:18px;
+height:80vh;
+overflow:auto;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.alert{
+color:red;
+font-size:22px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>GLOBAL CYBER SECURITY NETWORK</h1>
+
+<canvas id="matrix"></canvas>
+
+<div id="terminal"></div>
+
+<audio id="alarm">
+<source src="https://www.soundjay.com/misc/sounds/alarm-beep-01.mp3">
+</audio>
+
+<script>
+
+let name = prompt("TARGET IDENTIFICATION: Enter Name");
+
+let ip = "192.168." + Math.floor(Math.random()*255) + "." + Math.floor(Math.random()*255);
+
+let locations = [
+"New York",
+"London",
+"Tokyo",
+"Berlin",
+"Dubai",
+"Mumbai",
+"Delhi"
+];
+
+let location = locations[Math.floor(Math.random()*locations.length)];
+
+let lines = [
+
+"Initializing cyber security protocol...",
+"Accessing global network...",
+"Scanning connected devices...",
+"Target identified: " + name,
+"Tracking IP address...",
+"IP Address found: " + ip,
+"Locating device position...",
+"Location detected: " + location,
+"Scanning personal files...",
+"Downloading photos...",
+"Downloading contacts...",
+"Downloading messages...",
+"Bypassing firewall...",
+"Injecting exploit...",
+"⚠ WARNING: SECURITY BREACH DETECTED ⚠",
+"Accessing front camera...",
+"Uploading data to secure server...",
+"Mission Successful",
+"All files copied successfully...",
+];
+
+let i=0;
+
+function type(){
+
+if(i<lines.length){
+
+let text=lines[i];
+
+if(text.includes("WARNING"))
+text="<span class='alert'>"+text+"</span>";
+
+document.getElementById("terminal").innerHTML += "<p>"+text+"</p>";
+
+if(text.includes("WARNING")){
+document.body.style.background="darkred";
+document.getElementById("alarm").play();
+}
+
+i++;
+
+setTimeout(type,1200);
+
+}
+
+}
+
+type();
+
+
+/* MATRIX EFFECT */
+
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = "01";
+const font_size = 14;
+const columns = canvas.width/font_size;
+
+const drops = [];
+
+for(let x=0;x<columns;x++)
+drops[x]=1;
+
+function draw(){
+
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#0F0";
+ctx.font=font_size+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+
+let text=letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*font_size,drops[i]*font_size);
+
+if(drops[i]*font_size>canvas.height && Math.random()>0.975)
+drops[i]=0;
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(draw,35);
+
+</script>
+
+</body>
+</html>
