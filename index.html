@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cyber Security Scan</title>
+<title>Global Cyber Intelligence</title>
 
 <style>
 
@@ -21,8 +21,32 @@ padding:10px;
 #terminal{
 padding:20px;
 font-size:18px;
-height:75vh;
+height:65vh;
 overflow:auto;
+}
+
+.alert{
+color:red;
+font-size:24px;
+font-weight:bold;
+}
+
+#virusScreen{
+position:fixed;
+top:35%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:red;
+display:none;
+}
+
+#virusText{
+font-size:50px;
+}
+
+#countdown{
+font-size:100px;
 }
 
 canvas{
@@ -32,37 +56,21 @@ left:0;
 z-index:-1;
 }
 
-.alert{
-color:red;
-font-size:22px;
-}
-
-.progress{
-width:80%;
-height:20px;
-border:1px solid #00ff00;
-margin-top:10px;
-}
-
-.bar{
-height:100%;
-width:0%;
-background:#00ff00;
-}
-
 </style>
+
 </head>
 
 <body>
 
-<h1>GLOBAL CYBER SECURITY NETWORK</h1>
+<h1>GLOBAL CYBER INTELLIGENCE NETWORK</h1>
 
 <canvas id="matrix"></canvas>
 
 <div id="terminal"></div>
 
-<div class="progress">
-<div class="bar" id="bar"></div>
+<div id="virusScreen">
+<div id="virusText">⚠ VIRUS DETECTED ⚠</div>
+<div id="countdown">10</div>
 </div>
 
 <audio id="alarm">
@@ -71,141 +79,46 @@ background:#00ff00;
 
 <script>
 
-let name = prompt("TARGET IDENTIFICATION: Enter Name");
+let name = prompt("ENTER TARGET NAME");
 
-let ip = "192.168." + Math.floor(Math.random()*255) + "." + Math.floor(Math.random()*255);
+let ip="192.168."+Math.floor(Math.random()*255)+"."+Math.floor(Math.random()*255);
 
-let locations = [
+let cities=[
 "New York",
 "London",
 "Tokyo",
-"Berlin",
 "Dubai",
+"Berlin",
 "Mumbai",
 "Delhi",
-"Bangalore"
+"Bangalore",
+"Singapore"
 ];
 
-let location = locations[Math.floor(Math.random()*locations.length)];
+let city=cities[Math.floor(Math.random()*cities.length)];
 
-let battery = Math.floor(Math.random()*100);
+let battery=Math.floor(Math.random()*100);
 
-let lines = [
+let lines=[
 
-"Initializing cyber security protocol...",
-"Accessing global network...",
-"Scanning connected devices...",
-"Target identified: " + name,
+"Connecting to international cyber intelligence server...",
+"Authentication successful...",
+"Scanning global network...",
+"Target detected...",
+"Target Name: "+name,
 "Tracking IP address...",
-"IP Address found: " + ip,
-"Detecting device type...",
+"IP address located: "+ip,
+"Detecting device system...",
 "Device: Android Mobile",
 "Checking battery status...",
-"Battery: " + battery + "%",
-"Locating device position...",
-"Location detected: " + location,
-"Scanning personal files...",
+"Battery: "+battery+"%",
+"Scanning storage...",
 "Downloading photos...",
 "Downloading contacts...",
-"Downloading messages...",
-"Bypassing firewall...",
-"Injecting exploit...",
-"⚠ WARNING: SECURITY BREACH DETECTED ⚠",
+"Downloading WhatsApp messages...",
 "Accessing front camera...",
-"Uploading data to secure server...",
-"Mission Successful",
-"All files copied successfully..."
-
-];
-
-let i=0;
-
-function type(){
-
-if(i<lines.length){
-
-let text=lines[i];
-
-if(text.includes("WARNING"))
-text="<span class='alert'>"+text+"</span>";
-
-document.getElementById("terminal").innerHTML += "<p>"+text+"</p>";
-
-if(text.includes("WARNING")){
-document.body.style.background="darkred";
-document.getElementById("alarm").play();
-}
-
-i++;
-
-setTimeout(type,1200);
-
-}
-
-}
-
-type();
-
-/* Progress bar */
-
-let width = 0;
-let bar = document.getElementById("bar");
-
-let progress = setInterval(function(){
-
-if(width>=100){
-clearInterval(progress);
-}else{
-width++;
-bar.style.width = width + "%";
-}
-
-},120);
-
-
-/* MATRIX EFFECT */
-
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
-
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-
-const letters = "01";
-const font_size = 14;
-const columns = canvas.width/font_size;
-
-const drops = [];
-
-for(let x=0;x<columns;x++)
-drops[x]=1;
-
-function draw(){
-
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#0F0";
-ctx.font=font_size+"px monospace";
-
-for(let i=0;i<drops.length;i++){
-
-let text=letters[Math.floor(Math.random()*letters.length)];
-
-ctx.fillText(text,i*font_size,drops[i]*font_size);
-
-if(drops[i]*font_size>canvas.height && Math.random()>0.975)
-drops[i]=0;
-
-drops[i]++;
-
-}
-
-}
-
-setInterval(draw,35);
-
-</script>
-
-</body>
-</html>
+"Camera access granted",
+"Locating device GPS...",
+"Location detected: "+city,
+"Injecting remote exploit...",
+"⚠ SECURITY BREACH DETECTED ⚠",
