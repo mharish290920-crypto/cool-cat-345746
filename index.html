@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Secure Cyber</title>
+<title>Cyber Security Scan</title>
 
 <style>
 
@@ -21,7 +21,7 @@ padding:10px;
 #terminal{
 padding:20px;
 font-size:18px;
-height:80vh;
+height:75vh;
 overflow:auto;
 }
 
@@ -37,8 +37,20 @@ color:red;
 font-size:22px;
 }
 
-</style>
+.progress{
+width:80%;
+height:20px;
+border:1px solid #00ff00;
+margin-top:10px;
+}
 
+.bar{
+height:100%;
+width:0%;
+background:#00ff00;
+}
+
+</style>
 </head>
 
 <body>
@@ -48,6 +60,10 @@ font-size:22px;
 <canvas id="matrix"></canvas>
 
 <div id="terminal"></div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
 
 <audio id="alarm">
 <source src="https://www.soundjay.com/misc/sounds/alarm-beep-01.mp3">
@@ -66,10 +82,13 @@ let locations = [
 "Berlin",
 "Dubai",
 "Mumbai",
-"Delhi"
+"Delhi",
+"Bangalore"
 ];
 
 let location = locations[Math.floor(Math.random()*locations.length)];
+
+let battery = Math.floor(Math.random()*100);
 
 let lines = [
 
@@ -79,6 +98,10 @@ let lines = [
 "Target identified: " + name,
 "Tracking IP address...",
 "IP Address found: " + ip,
+"Detecting device type...",
+"Device: Android Mobile",
+"Checking battery status...",
+"Battery: " + battery + "%",
 "Locating device position...",
 "Location detected: " + location,
 "Scanning personal files...",
@@ -91,7 +114,8 @@ let lines = [
 "Accessing front camera...",
 "Uploading data to secure server...",
 "Mission Successful",
-"All files copied successfully...",
+"All files copied successfully..."
+
 ];
 
 let i=0;
@@ -121,6 +145,22 @@ setTimeout(type,1200);
 }
 
 type();
+
+/* Progress bar */
+
+let width = 0;
+let bar = document.getElementById("bar");
+
+let progress = setInterval(function(){
+
+if(width>=100){
+clearInterval(progress);
+}else{
+width++;
+bar.style.width = width + "%";
+}
+
+},120);
 
 
 /* MATRIX EFFECT */
